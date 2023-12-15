@@ -1,7 +1,15 @@
 import { createUploadthing } from "uploadthing/next-legacy";
 import type { FileRouter } from "uploadthing/next-legacy";
 
-const f = createUploadthing();
+const f = createUploadthing({
+    errorFormatter: (err) => {
+      console.log('error', err);
+      console.log('cause', err.cause);
+      return {
+        message: err.message,
+      };
+    },
+  });
 /**
  * This is your Uploadthing file router. For more information:
  * @see https://docs.uploadthing.com/api-reference/server#file-routes
